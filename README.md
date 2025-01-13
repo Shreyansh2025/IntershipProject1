@@ -125,6 +125,7 @@ Project1/
 |-- index.html
 |-- login.html
 |-- register.html
+|-- dashboard.html
 |-- css/
 |   |-- style.css
 |-- js/
