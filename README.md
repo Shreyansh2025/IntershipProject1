@@ -9,7 +9,7 @@ Welcome to the **Internship Project 1** repository! This project is part of an i
 
 ## 📋 Project Description  
 
-This project focuses on Dynamic Blog.
+A web-based project that implements authentication, blog post management, and user-friendly validation features.
 
 ---
 ## Pages
