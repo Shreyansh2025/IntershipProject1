@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Blog</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f4f9;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+
+      header {
+        background-color: #003366;
+        color: #fff;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      header h1 {
+        font-size: 1.8rem;
+        font-weight: 600;
+      }
+
+      header nav {
+        display: flex;
+        gap: 15px;
+      }
+
+      header nav a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      header nav a:hover {
+        color: #ffcc00;
+      }
+
+      main {
+        flex-grow: 1;
+        padding: 20px;
+      }
+
+      main h1 {
+        font-size: 2rem;
+        color: #003366;
+        margin-bottom: 20px;
+      }
+      .dashboard-stats {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+
+      .stat-card {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        flex: 1;
+      }
+
+      .stat-card h3 {
+        font-size: 1.2rem;
+        color: #495057;
+      }
+
+      .stat-card p {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #007bff;
+      }
+      section {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #003366;
+      }
+
+      section form label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 5px;
+        color: #555;
+      }
+
+      section form input,
+      section form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border 0.3s ease;
+      }
+
+      section form input:focus,
+      section form textarea:focus {
+        border-color: #003366;
+        outline: none;
+      }
+
+      section form button {
+        background-color: #003366;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      section form button:hover {
+        background-color: #002244;
+      }
+
+      .user-posts article {
+        background-color: #fff;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .user-posts article p {
+        margin-bottom: 10px;
+      }
+
+      .user-posts article button {
+        background-color: #4d5fff;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-right: 5px;
+        transition: background-color 0.3s ease;
+      }
+
+      .user-posts article button:hover {
+        background-color: #0014cc;
+      }
+
+      footer {
+        background-color: #003366;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        font-size: 0.9rem;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <a class="navbar-brand" href="/Bootstrap/index.html">iCoder</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/Bootstrap/index.html"
+                >Home <span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/Bootstrap/about.html">About</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="/Bootstrap/contact.html">Contact Us</a>
+            </li>
+          </ul>
+      <h1 class="text-light">Welcome, <span id="username-placeholder">[User]</span></h1>
+          
+        </div>
+      </nav>
+
+    <main>
+      <h1>Dashboard</h1>
+      <section class="dashboard-stats">
+        <div class="stat-card">
+          <h3>Total Posts</h3>
+          <p id="total-posts">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Total Comments</h3>
+          <p id="total-comments">0</p>
+        </div>
+        <div class="stat-card">
+          <h3>Total Likes</h3>
+          <p id="total-likes">0</p>
+        </div>
+      </section>
+      <section>
+        <h2>Create a New Post</h2>
+        <form id="post-form">
+          <label for="title">Title:</label>
+          <input class="col-6"
+            type="text"
+            id="title"
+            name="title"
+            placeholder="Enter post title"
+            required
+          />
+          <label for="category">Category:</label>
+          <input class="col-6"
+            type="text"
+            id="category"
+            placeholder="Enter category name"
+            required
+          />
+          <label for="blogDate">Date</label>
+          <input type="date" class="col-6" placeholder="dd-mm-yy" id="blogDate" required />
+          <label for="blogDescription">Description</label>
+          <textarea id="blogDescription" rows="4" required></textarea>
+          
+          <button type="submit" class="col-12">Create Post</button>
+        </form>
+      </section>
+      <section class="user-posts">
+        <h2>Your Posts</h2>
+        <div id="posts-container"></div>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2025 Dynamic Blog | All rights reserved.</p>
+    </footer>
+
+    <script>
+      const postForm = document.getElementById("post-form");
+      const postsContainer = document.getElementById("posts-container");
+      const totalPostsElement = document.getElementById("total-posts");
+      const totalCommentsElement = document.getElementById("total-comments");
+      const totalLikesElement = document.getElementById("total-likes");
+
+      function loadPosts() {
+        const posts = JSON.parse(localStorage.getItem("posts")) || [];
+        totalPostsElement.textContent = posts.length;
+
+        let totalComments = 0;
+        let totalLikes = 0;
+
+        postsContainer.innerHTML = "";
+
+        posts.forEach((post, index) => {
+          totalComments += post.comments || 0;
+          totalLikes += post.likes || 0;
+
+          // Add the post to the dashboard
+          const postElement = document.createElement("article");
+          postElement.innerHTML = `
+      <div class="col-md-6">
+          <div
+            class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"
+          >
+            <div class="col p-4 d-flex flex-column position-static">
+        <strong class="d-inline-block mb-2 text-warning">${post.title}</strong>
+        <h3 class="mb-0">${post.category}</h3>
+        <div class="mb-1 text-muted">${post.blogDate}</div>
+        <p class="mb-auto">${post.blogDescription}</p>
+        
+            </div>
+            </div>
+            </div>
+            <button class="edit-btn bg-warning " data-index="${index}">Edit</button>
+          <button class="delete-btn bg-primary" data-index="${index}">Delete</button>
+    `;
+          postsContainer.appendChild(postElement);
+        });
+
+        totalCommentsElement.textContent = totalComments;
+        totalLikesElement.textContent = totalLikes;
+      }
+
+      
+      postForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const title = document.getElementById("title").value;
+        const category = document.getElementById("category").value;
+        const blogDate = document.getElementById("blogDate").value;
+        const blogDescription =
+          document.getElementById("blogDescription").value;
+
+        // const blogImage =
+        //   document.getElementById("blogImage").dataset.base64 || "";
+
+        const newPost = {
+          title: title,
+          category: category,
+          blogDate: blogDate,
+          blogDescription: blogDescription,
+          // blogImage: blogImage,
+          comments: 0,
+          likes: 0,
+        };
+
+        // Save post to localStorage
+        let posts = JSON.parse(localStorage.getItem("posts")) || [];
+        posts.push(newPost);
+        localStorage.setItem("posts", JSON.stringify(posts));
+        window.dispatchEvent(new Event("storage"));
+        // Create and append post
+        loadPosts();
+        postForm.reset();
+      });
+
+      // Handle edit and delete actions
+      postsContainer.addEventListener("click", function (e) {
+        const posts = JSON.parse(localStorage.getItem("posts")) || [];
+        const index = e.target.getAttribute("data-index");
+
+        if (e.target.classList.contains("edit-btn")) {
+          const post = posts[index];
+          document.getElementById("title").value = post.title;
+          document.getElementById("category").value = post.category;
+          document.getElementById("blogDate").value = post.blogDate;
+          document.getElementById("blogDescription").value =
+            post.blogDescription;
+          // document.getElementById("blogImage").value = post.blogImage;
+
+          // Remove the post for re-editing after submission
+          posts.splice(index, 1);
+          localStorage.setItem("posts", JSON.stringify(posts));
+          loadPosts();
+        }
+
+        if (e.target.classList.contains("delete-btn")) {
+          posts.splice(index, 1);
+          localStorage.setItem("posts", JSON.stringify(posts));
+
+          // Reload posts and update stats
+          loadPosts();
+        }
+      });
+
+      // Load posts on page load
+      window.addEventListener("DOMContentLoaded", function () {
+        const username = localStorage.getItem("username");
+        if (username) {
+          document.getElementById("username-placeholder").textContent =
+            username;
+        }
+
+        loadPosts();
+      });
+    </script>
+    
+      
+  </body>
+</html>
