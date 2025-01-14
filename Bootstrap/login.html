@@ -218,9 +218,12 @@
           e.preventDefault();
           passwordError.textContent = ""; // Clear error
           // Redirect to the dashboard
-          console.log("Redirecting to Dashboard...");
+          const username = document.getElementById("login-username").value;
+          localStorage.setItem("username", username);
+          localStorage.setItem("password", password);
           window.location.href = "/Bootstrap/Dashboard.html";
         }
+
       });
     </script>
   </body>
