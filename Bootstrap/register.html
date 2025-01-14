@@ -128,6 +128,15 @@
       .form-container p a:hover {
         text-decoration: underline;
       }
+      .error {
+        font-size: 0.9rem;
+        color: red;
+        margin-top: 5px;
+        margin-bottom: 5px;
+      }
+      .form-container input:invalid {
+            border-color: #f44336;
+        }
       footer {
         background-color: #003366;
         color: white;
@@ -159,7 +168,11 @@
 
     <main>
       <div class="form-container">
-        <form id="register-form" method="POST" action="/register">
+        <form
+          id="register-form"
+          method="POST"
+          action="#"
+        > 
           <h1>Register</h1>
           <label for="username">Username:</label>
           <input
@@ -185,8 +198,12 @@
             placeholder="Enter your password"
             required
           />
+          <div class="error" id="passwordError"></div>
           <button type="submit">Register</button>
-          <p>You already have an account? <a href="/Bootstrap/login.html">Login</a></p>
+          <p>
+            You already have an account?
+            <a href="/Bootstrap/login.html">Login</a>
+          </p>
         </form>
       </div>
     </main>
@@ -199,17 +216,31 @@
     </footer>
     <script>
       const registerForm = document.getElementById("register-form");
+      const passwordInput = document.getElementById("register-password"); // Use register-password for registration form
+      const passwordError = document.getElementById("passwordError");
 
+      // Validate password strength on form submission
       registerForm.addEventListener("submit", function (e) {
-        e.preventDefault();
+        const password = passwordInput.value;
+        const strongPasswordRegex =
+          /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/;
 
-        const username = document.getElementById("register-username").value;
-        const password = document.getElementById("register-password").value;
+        if (!strongPasswordRegex.test(password)) {
+          e.preventDefault(); // Prevent form submission
+          passwordError.textContent =
+            "Password must be at least 8 characters long, include uppercase and lowercase letters, a number, and a special character (!@#$%^&*).";
+        } else {
+          e.preventDefault(); // Prevent form submission if password is valid (we will handle it manually)
+          passwordError.textContent = ""; // Clear error
 
-        localStorage.setItem("username", username);
-        localStorage.setItem("password", password); 
+          // Save the username and password to localStorage
+          const username = document.getElementById("register-username").value;
+          localStorage.setItem("username", username);
+          localStorage.setItem("password", password);
 
-        window.location.href = "/Bootstrap/Dashboard.html"; 
+          // Redirect to the dashboard
+          window.location.href = "/Bootstrap/Dashboard.html";
+        }
       });
     </script>
   </body>
